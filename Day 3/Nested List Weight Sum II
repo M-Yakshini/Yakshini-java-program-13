@@ -1,0 +1,15 @@
+class Solution {
+    public int depthSumInverse(List<NestedInteger> l){
+        int sum=0,prev=0;
+        while(!l.isEmpty()){
+            List<NestedInteger> next=new ArrayList<>();
+            for(NestedInteger n:l){
+                if(n.isInteger()) prev+=n.getInteger();
+                else next.addAll(n.getList());
+            }
+            sum+=prev;
+            l=next;
+        }
+        return sum;
+    }
+}
