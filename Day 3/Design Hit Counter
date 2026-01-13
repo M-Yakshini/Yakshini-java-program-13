@@ -1,0 +1,8 @@
+class HitCounter {
+    Queue<Integer> q=new LinkedList<>();
+    public void hit(int t){q.add(t);}
+    public int getHits(int t){
+        while(!q.isEmpty()&&t-q.peek()>=300) q.poll();
+        return q.size();
+    }
+}
