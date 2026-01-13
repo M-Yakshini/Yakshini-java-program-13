@@ -1,0 +1,16 @@
+class Solution {
+    public ListNode plusOne(ListNode h){
+        int c=dfs(h);
+        if(c==0) return h;
+        ListNode n=new ListNode(1);
+        n.next=h;
+        return n;
+    }
+    int dfs(ListNode n){
+        if(n==null) return 1;
+        int c=dfs(n.next);
+        int s=n.val+c;
+        n.val=s%10;
+        return s/10;
+    }
+}
