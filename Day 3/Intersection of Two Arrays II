@@ -1,0 +1,16 @@
+dayclass Solution {
+    public int[] intersect(int[] nums1, int[] nums2) {
+        Map<Integer,Integer> m=new HashMap<>();
+        for(int x:nums1) m.put(x,m.getOrDefault(x,0)+1);
+        List<Integer> r=new ArrayList<>();
+        for(int x:nums2){
+            if(m.getOrDefault(x,0)>0){
+                r.add(x);
+                m.put(x,m.get(x)-1);
+            }
+        }
+        int[] a=new int[r.size()];
+        for(int i=0;i<r.size();i++) a[i]=r.get(i);
+        return a;
+    }
+}
