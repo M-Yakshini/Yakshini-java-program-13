@@ -1,0 +1,22 @@
+class Solution {
+    public String rearrangeString(String s,int k){
+        if(k==0) return s;
+        int[] c=new int[26];
+        for(char ch:s.toCharArray()) c[ch-'a']++;
+        PriorityQueue<int[]> pq=new PriorityQueue<>((a,b)->b[0]-a[0]);
+        for(int i=0;i<26;i++) if(c[i]>0) pq.add(new int[]{c[i],i});
+        Queue<int[]> q=new LinkedList<>();
+        StringBuilder sb=new StringBuilder();
+        while(!pq.isEmpty()){
+            int[] x=pq.poll();
+            sb.append((char)(x[1]+'a'));
+            x[0]--;
+            q.add(x);
+            if(q.size()==k){
+                int[] y=q.poll();
+                if(y[0]>0) pq.add(y);
+            }
+        }
+        return sb.length()==s.length()?sb.toString():"";
+    }
+}
