@@ -1,0 +1,33 @@
+class SnakeGame {
+    int w,h,score=0;
+    Deque<int[]> dq=new ArrayDeque<>();
+    Set<String> set=new HashSet<>();
+    int[][] food;
+    int idx=0;
+    public SnakeGame(int width,int height,int[][] food){
+        w=width;h=height;this.food=food;
+        dq.add(new int[]{0,0});
+        set.add("0,0");
+    }
+    public int move(String d){
+        int[] head=dq.peekFirst();
+        int x=head[0],y=head[1];
+        if(d.equals("U")) x--;
+        if(d.equals("D")) x++;
+        if(d.equals("L")) y--;
+        if(d.equals("R")) y++;
+        if(x<0||y<0||x>=h||y>=w) return -1;
+        String key=x+","+y;
+        int[] tail=dq.peekLast();
+        set.remove(tail[0]+","+tail[1]);
+        if(set.contains(key)) return -1;
+        dq.addFirst(new int[]{x,y});
+        set.add(key);
+        if(idx<food.length&&x==food[idx][0]&&y==food[idx][1]){
+            score++;idx++;
+            set.add(tail[0]+","+tail[1]);
+            dq.addLast(tail);
+        }else dq.pollLast();
+        return score;
+    }
+}
