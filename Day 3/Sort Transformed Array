@@ -1,0 +1,16 @@
+ class Solution {
+    public int[] sortTransformedArray(int[] n,int a,int b,int c){
+        int l=0,r=n.length-1,i=a>=0?n.length-1:0;
+        int[] res=new int[n.length];
+        while(l<=r){
+            int x=f(n[l],a,b,c),y=f(n[r],a,b,c);
+            if(a>=0){
+                if(x>y){res[i--]=x;l++;}else{res[i--]=y;r--;}
+            }else{
+                if(x<y){res[i++]=x;l++;}else{res[i++]=y;r--;}
+            }
+        }
+        return res;
+    }
+    int f(int x,int a,int b,int c){return a*x*x+b*x+c;}
+}
