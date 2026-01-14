@@ -1,0 +1,17 @@
+class PhoneDirectory {
+    Queue<Integer> q=new LinkedList<>();
+    Set<Integer> set=new HashSet<>();
+    public PhoneDirectory(int n){
+        for(int i=0;i<n;i++) q.add(i);
+    }
+    public int get(){
+        if(q.isEmpty()) return -1;
+        int x=q.poll();
+        set.add(x);
+        return x;
+    }
+    public boolean check(int n){return !set.contains(n);}
+    public void release(int n){
+        if(set.remove(n)) q.add(n);
+    }
+}
