@@ -1,0 +1,11 @@
+class Solution {
+    public int wiggleMaxLength(int[] n){
+        if(n.length<2) return n.length;
+        int up=1,down=1;
+        for(int i=1;i<n.length;i++){
+            if(n[i]>n[i-1]) up=down+1;
+            else if(n[i]<n[i-1]) down=up+1;
+        }
+        return Math.max(up,down);
+    }
+}
