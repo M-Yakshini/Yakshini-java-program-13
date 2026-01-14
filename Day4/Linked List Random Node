@@ -1,0 +1,13 @@
+class Solution {
+    ListNode h;
+    Random r=new Random();
+    public Solution(ListNode head){h=head;}
+    public int getRandom(){
+        int res=h.val,i=1;
+        for(ListNode n=h.next;n!=null;n=n.next){
+            i++;
+            if(r.nextInt(i)==0) res=n.val;
+        }
+        return res;
+    }
+}
