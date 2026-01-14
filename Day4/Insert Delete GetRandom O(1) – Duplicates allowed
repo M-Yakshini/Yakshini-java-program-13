@@ -1,0 +1,26 @@
+class RandomizedCollection {
+    List<Integer> l=new ArrayList<>();
+    Map<Integer,Set<Integer>> m=new HashMap<>();
+    Random r=new Random();
+    public boolean insert(int v){
+        boolean res=!m.containsKey(v);
+        m.computeIfAbsent(v,k->new HashSet<>()).add(l.size());
+        l.add(v);
+        return res;
+    }
+    public boolean remove(int v){
+        if(!m.containsKey(v)||m.get(v).isEmpty()) return false;
+        int i=m.get(v).iterator().next();
+        m.get(v).remove(i);
+        int last=l.get(l.size()-1);
+        l.set(i,last);
+        m.get(last).add(i);
+        m.get(last).remove(l.size()-1);
+        l.remove(l.size()-1);
+        if(m.get(v).isEmpty()) m.remove(v);
+        return true;
+    }
+    public int getRandom(){
+        return l.get(r.nextInt(l.size()));
+    }
+}
