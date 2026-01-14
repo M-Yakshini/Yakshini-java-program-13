@@ -1,0 +1,15 @@
+class Solution {
+    public int superPow(int a,int[] b){
+        int r=1;
+        for(int x:b){
+            r=pow(r,10)*pow(a,x)%1337;
+        }
+        return r;
+    }
+    int pow(int a,int k){
+        int r=1;
+        a%=1337;
+        while(k-->0) r=r*a%1337;
+        return r;
+    }
+}
