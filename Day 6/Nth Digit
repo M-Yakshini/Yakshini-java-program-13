@@ -1,0 +1,13 @@
+class Solution {
+    public int findNthDigit(int n){
+        long d=1,c=9,start=1;
+        while(n>d*c){
+            n-=d*c;
+            d++;
+            c*=10;
+            start*=10;
+        }
+        start+=(n-1)/d;
+        return String.valueOf(start).charAt((int)((n-1)%d))-'0';
+    }
+}
