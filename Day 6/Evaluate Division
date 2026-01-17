@@ -1,0 +1,23 @@
+class Solution {
+    public double[] calcEquation(List<List<String>> e,double[] v,List<List<String>> q){
+        Map<String,Map<String,Double>> g=new HashMap<>();
+        for(int i=0;i<e.size();i++){
+            String a=e.get(i).get(0),b=e.get(i).get(1);
+            g.computeIfAbsent(a,k->new HashMap<>()).put(b,v[i]);
+            g.computeIfAbsent(b,k->new HashMap<>()).put(a,1.0/v[i]);
+        }
+        double[] r=new double[q.size()];
+        for(int i=0;i<q.size();i++)
+            r[i]=dfs(q.get(i).get(0),q.get(i).get(1),new HashSet<>(),g);
+        return r;
+    }
+    double dfs(String a,String b,Set<String> s,Map<String,Map<String,Double>> g){
+        if(!g.containsKey(a)||!s.add(a)) return -1;
+        if(a.equals(b)) return 1;
+        for(String k:g.get(a).keySet()){
+            double r=dfs(k,b,s,g);
+            if(r!=-1) return r*g.get(a).get(k);
+        }
+        return -1;
+    }
+}
