@@ -1,0 +1,17 @@
+class Solution {
+    public int splitArray(int[] n,int m){
+        int l=0,r=0;
+        for(int x:n){l=Math.max(l,x);r+=x;}
+        while(l<r){
+            int mid=l+(r-l)/2;
+            int c=1,s=0;
+            for(int x:n){
+                if(s+x>mid){c++;s=0;}
+                s+=x;
+            }
+            if(c>m) l=mid+1;
+            else r=mid;
+        }
+        return l;
+    }
+}
