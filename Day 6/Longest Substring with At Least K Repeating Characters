@@ -1,0 +1,14 @@
+class Solution {
+    public int longestSubstring(String s,int k){
+        return dfs(s,0,s.length(),k);
+    }
+    int dfs(String s,int l,int r,int k){
+        if(r-l<k) return 0;
+        int[] c=new int[26];
+        for(int i=l;i<r;i++) c[s.charAt(i)-'a']++;
+        for(int i=l;i<r;i++)
+            if(c[s.charAt(i)-'a']<k)
+                return Math.max(dfs(s,l,i,k),dfs(s,i+1,r,k));
+        return r-l;
+    }
+}
