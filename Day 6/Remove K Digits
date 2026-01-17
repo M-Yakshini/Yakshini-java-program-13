@@ -1,0 +1,21 @@
+class Solution {
+    public String removeKdigits(String n,int k){
+        Deque<Character> s=new ArrayDeque<>();
+        for(char c:n.toCharArray()){
+            while(!s.isEmpty()&&k>0&&s.peekLast()>c){
+                s.pollLast();
+                k--;
+            }
+            s.addLast(c);
+        }
+        while(k-->0&&!s.isEmpty()) s.pollLast();
+        StringBuilder r=new StringBuilder();
+        boolean z=true;
+        for(char c:s){
+            if(z&&c=='0') continue;
+            z=false;
+            r.append(c);
+        }
+        return r.length()==0?"0":r.toString();
+    }
+}
