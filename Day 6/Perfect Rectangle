@@ -1,0 +1,19 @@
+class Solution {
+    public boolean isRectangleCover(int[][] r){
+        int minX=Integer.MAX_VALUE,minY=Integer.MAX_VALUE,maxX=Integer.MIN_VALUE,maxY=Integer.MIN_VALUE;
+        Set<String> s=new HashSet<>();
+        int area=0;
+        for(int[] x:r){
+            minX=Math.min(minX,x[0]);
+            minY=Math.min(minY,x[1]);
+            maxX=Math.max(maxX,x[2]);
+            maxY=Math.max(maxY,x[3]);
+            area+=(x[2]-x[0])*(x[3]-x[1]);
+            String[] p={x[0]+" "+x[1],x[0]+" "+x[3],x[2]+" "+x[1],x[2]+" "+x[3]};
+            for(String k:p) if(!s.add(k)) s.remove(k);
+        }
+        if(s.size()!=4) return false;
+        if(!s.contains(minX+" "+minY)||!s.contains(minX+" "+maxY)||!s.contains(maxX+" "+minY)||!s.contains(maxX+" "+maxY)) return false;
+        return area==(maxX-minX)*(maxY-minY);
+    }
+}
