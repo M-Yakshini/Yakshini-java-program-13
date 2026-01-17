@@ -1,0 +1,19 @@
+class Solution {
+    public String decodeString(String s){
+        Stack<Integer> c=new Stack<>();
+        Stack<String> st=new Stack<>();
+        String r="";
+        int n=0;
+        for(char x:s.toCharArray()){
+            if(Character.isDigit(x)) n=n*10+(x-'0');
+            else if(x=='['){c.push(n);st.push(r);n=0;r="";}
+            else if(x==']'){
+                StringBuilder sb=new StringBuilder(st.pop());
+                int k=c.pop();
+                while(k-->0) sb.append(r);
+                r=sb.toString();
+            }else r+=x;
+        }
+        return r;
+    }
+}
